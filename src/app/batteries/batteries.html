@@ -1,0 +1,109 @@
+<div class="batteries-page">
+  <div class="batteries-header">
+    <h1>Battery Products Catalog</h1>
+    <p>Premium energy solutions for every need</p>
+  </div>
+
+  <!-- Details Modal -->
+  <div class="details-modal" [class.active]="selectedProductDetails" *ngIf="selectedProductDetails">
+    <div class="details-overlay" (click)="closeDetails()"></div>
+    
+    <div class="details-container">
+      <button class="close-btn" (click)="closeDetails()">×</button>
+      
+      <div class="details-content">
+        <div class="details-image">
+          <span class="large-icon">{{ selectedProductDetails.image }}</span>
+        </div>
+
+        <div class="details-info">
+          <h2>{{ selectedProductDetails.name }}</h2>
+          <p class="details-price">{{ selectedProductDetails.price }}</p>
+          
+          <div class="specifications">
+            <h3>Specifications</h3>
+            <table class="specs-table">
+              <tbody>
+                <tr *ngFor="let key of getDetailsKeys()">
+                  <td class="spec-label">{{ key | uppercase }}</td>
+                  <td class="spec-value">{{ selectedProductDetails.details[key] }}</td>
+                </tr>
+                <tr>
+                  <td class="spec-label">DIMENSIONS</td>
+                  <td class="spec-value">
+                    L: {{ selectedProductDetails.details.dimensions.length }} | 
+                    W: {{ selectedProductDetails.details.dimensions.width }} | 
+                    H: {{ selectedProductDetails.details.dimensions.height }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="actions">
+            <button class="btn-add-cart" (click)="addToCart(selectedProductDetails); closeDetails()">Add to Cart</button>
+            <button class="btn-close" (click)="closeDetails()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="batteries-container">
+    <!-- Sidebar Categories -->
+    <aside class="categories-sidebar">
+      <h3>Categories</h3>
+      <ul class="categories-list">
+        <li *ngFor="let cat of categories" 
+            [class.active]="selectedCategory === cat.id"
+            (click)="selectCategory(cat.id)">
+          <span class="category-icon">{{ cat.icon }}</span>
+          <span class="category-name">{{ cat.name }}</span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Main Products Section -->
+    <main class="products-section">
+      <div class="section-header">
+        <h2>{{ getCategoryName() }}</h2>
+        <span class="product-count">{{ filteredProducts.length }} Products</span>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card" *ngFor="let product of filteredProducts">
+          <div class="product-image">
+            <span class="product-icon">{{ product.image }}</span>
+            <span class="badge">{{ product.category | uppercase }}</span>
+          </div>
+
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="description">{{ product.description }}</p>
+
+            <div class="product-specs">
+              <span *ngFor="let spec of product.specs" class="spec-tag">{{ spec }}</span>
+            </div>
+
+            <div class="rating">
+              <span class="stars">⭐ {{ product.rating }}</span>
+              <span class="reviews">({{ product.reviews }} reviews)</span>
+            </div>
+
+            <div class="product-footer">
+              <span class="price">{{ product.price }}</span>
+              <div class="actions">
+                <button class="btn-details" (click)="viewDetails(product)">Details</button>
+                <button class="btn-cart" (click)="addToCart(product)">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty-state" *ngIf="filteredProducts.length === 0">
+        <p>No products found in this category</p>
+      </div>
+    </main>
+  </div>
+</div>

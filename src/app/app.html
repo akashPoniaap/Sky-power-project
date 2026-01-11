@@ -1,0 +1,10 @@
+<app-navbar></app-navbar>
+
+<ng-container *ngIf="!showBatteries">
+  <app-hero></app-hero>
+  <app-about></app-about>
+</ng-container>
+
+<app-batteries *ngIf="showBatteries" [selectedCategory]="selectedBatteryCategory"></app-batteries>
+
+<app-footer></app-footer>

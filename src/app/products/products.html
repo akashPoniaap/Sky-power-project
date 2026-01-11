@@ -1,0 +1,44 @@
+<div class="products-modal" [class.active]="isOpen">
+  <div class="products-overlay" (click)="close()"></div>
+  
+  <div class="products-container">
+    <div class="products-header">
+      <h2>Our Products</h2>
+      <button class="close-btn" (click)="close()">×</button>
+    </div>
+
+    <div class="products-content" *ngIf="!selectedProduct">
+      <div class="products-grid">
+        <div class="product-card" *ngFor="let product of products" (click)="selectProduct(product)">
+          <div class="product-icon">{{ product.image }}</div>
+          <h3>{{ product.name }}</h3>
+          <p>{{ product.description }}</p>
+          <button class="view-btn">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-detail" *ngIf="selectedProduct">
+      <button class="back-btn" (click)="goBack()">← Back to Products</button>
+      
+      <div class="detail-header">
+        <div class="detail-icon">{{ selectedProduct.image }}</div>
+        <h2>{{ selectedProduct.name }}</h2>
+      </div>
+
+      <p class="detail-description">{{ selectedProduct.description }}</p>
+
+      <div class="features-section">
+        <h3>Key Features</h3>
+        <ul class="features-list">
+          <li *ngFor="let feature of selectedProduct.features">{{ feature }}</li>
+        </ul>
+      </div>
+
+      <div class="cta-section">
+        <button class="contact-btn">Contact Sales</button>
+        <button class="info-btn">Get More Info</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,172 @@
+.hero {
+  height: 90vh;
+  background: linear-gradient(135deg, rgba(10, 15, 31, 0.7) 0%, rgba(26, 42, 79, 0.7) 30%, rgba(13, 27, 63, 0.7) 60%, rgba(5, 10, 21, 0.7) 100%), 
+              url('/Images/Banner.png') center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+}
+
+.clouds {
+  background: radial-gradient(circle at 20% 20%, #1a4d7f22 20%, transparent 21%),
+              radial-gradient(circle at 80% 30%, #1a4d7f22 18%, transparent 19%),
+              radial-gradient(circle at 50% 70%, #1a4d7f22 22%, transparent 23%);
+  position: absolute;
+  width: 200%;
+  height: 100%;
+  animation: moveClouds 60s linear infinite;
+  opacity: 0.6;
+}
+
+@keyframes moveClouds {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.hero-content {
+  text-align: center;
+  color: white;
+  z-index: 2;
+}
+
+.hero-content {
+  position: relative;
+}
+
+.battery {
+  font-size: 80px;
+  animation: glow 2s infinite alternate;
+}
+
+.battery {
+  display: inline-block;
+  transition: transform 120ms ease;
+  animation: glow 2s infinite alternate, shake 4s infinite;
+  filter: drop-shadow(0 0 10px rgba(0, 255, 234, 0.6));
+}
+
+.battery svg {
+  display: block;
+}
+
+.battery rect[fill="#00ffea"] {
+  animation: cellGlow 2s infinite alternate;
+}
+
+.electric {
+  position: absolute;
+  left: 50%;
+  top: -8px;
+  transform: translateX(-50%) scale(0.9);
+  font-size: 44px;
+  color: #7fffd4;
+  opacity: 0;
+  text-shadow: 0 0 8px rgba(127,255,212,0.9), 0 0 18px rgba(127,255,212,0.6);
+  pointer-events: none;
+  z-index: 3;
+  animation: bolt 4s infinite ease-in-out;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 20%, rgba(255,255,255,0.45), rgba(127,255,212,0.08) 40%, transparent 60%);
+  animation: flash 4s infinite ease-in-out;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #00ffea; }
+  to { text-shadow: 0 0 20px #00ffea; }
+}
+
+@keyframes cellGlow {
+  from { fill: #00ffea; opacity: 0.5; }
+  to { fill: #00ffea; opacity: 1; }
+}
+
+@keyframes bolt {
+  0%, 78% { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.9); }
+  80% { opacity: 1; transform: translateX(-55%) translateY(-18px) scale(1.12) rotate(-8deg); }
+  84% { transform: translateX(-45%) translateY(10px) scale(1.08) rotate(6deg); }
+  88% { opacity: 0.7; transform: translateX(-50%) translateY(-6px) scale(0.98) rotate(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.95); }
+}
+
+@keyframes flash {
+  0%, 78% { opacity: 0; }
+  80% { opacity: 1; }
+  86% { opacity: 0.28; }
+  92% { opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 78% { transform: none; }
+  80% { transform: translateY(-6px) rotate(-6deg); }
+  84% { transform: translateY(6px) rotate(6deg); }
+  88% { transform: translateY(-2px) rotate(-2deg); }
+  100% { transform: none; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+    margin-top: 70px;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .battery svg {
+    width: 60px;
+    height: auto;
+  }
+
+  .electric {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    height: 60vh;
+    margin-top: 60px;
+  }
+
+  .hero-content h1 {
+    font-size: 24px;
+    margin: 10px 0 5px;
+  }
+
+  .hero-content p {
+    font-size: 12px;
+    padding: 0 15px;
+  }
+
+  .battery svg {
+    width: 50px;
+    height: auto;
+  }
+
+  .electric {
+    font-size: 28px;
+    top: -4px;
+  }
+}
+
+.hero-content h1 {
+  font-size: 52px;
+  margin: 10px 0;
+}
