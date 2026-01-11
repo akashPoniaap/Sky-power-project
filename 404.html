@@ -3,9 +3,27 @@
 <head>
   <meta charset="utf-8">
   <title>SkyPower</title>
-  <base href="/Sky-power-project/">
+  <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/png" href="/Sky-power-project/Images/fav-icon.png">
+  <link id="faviconLink" rel="icon" type="image/png" href="/Images/fav-icon.png">
+  <script>
+    // Dynamically set base href and favicon path based on platform
+    (function() {
+      const hostname = window.location.hostname;
+      const baseTag = document.querySelector('base');
+      const faviconTag = document.getElementById('faviconLink');
+      
+      if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // Local development
+        baseTag.href = '/';
+        faviconTag.href = '/Images/fav-icon.png';
+      } else if (hostname === 'akashponiaap.github.io') {
+        // GitHub Pages
+        baseTag.href = '/Sky-power-project/';
+        faviconTag.href = '/Sky-power-project/Images/fav-icon.png';
+      }
+    })();
+  </script>
 <style>body{margin:0;font-family:Arial,sans-serif}</style><link rel="stylesheet" href="styles-4IA75EXF.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="styles-4IA75EXF.css"></noscript></head>
 <body>
   <app-root></app-root>
